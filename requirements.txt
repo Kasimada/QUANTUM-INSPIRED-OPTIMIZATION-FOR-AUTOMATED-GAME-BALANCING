@@ -1,0 +1,11 @@
+# Core
+numpy
+pandas
+scipy
+matplotlib
+tqdm
+omegaconf
+requests
+
+# Optional / experiment acceleration
+torch>=2.0.0

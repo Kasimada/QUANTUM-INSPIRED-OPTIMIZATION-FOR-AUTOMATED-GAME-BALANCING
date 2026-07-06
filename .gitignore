@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.vscode/
+.idea/
+logs/
+*.log
+results/**/*.csv
+results/**/*.json
+results/**/*.pkl
+results/**/*.npy
+data/raw/
+data/processed/
+!data/README.md
+!data/examples/
+!data/examples/**
+
+# Cleanup & Runtime Output
+results/
+_archive/
+*.tmp

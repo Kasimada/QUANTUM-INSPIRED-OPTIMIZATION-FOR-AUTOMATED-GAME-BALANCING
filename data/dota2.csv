@@ -1,0 +1,3 @@
+Name,Class,hp,hpperlevel,mp,mpperlevel,movespeed,armor,armorperlevel,spellblock,spellblockperlevel,attackrange,hpregen,hpregenperlevel,mpregen,mpregenperlevel,crit,critperlevel,attackdamage,attackdamageperlevel,attackspeed,attackspeedperlevel
+Anti-Mage,Fighter,580,90,0,0,345,38,3.25,32,1.25,175,3.0,1.0,0,0.0,0,0,60,5,0.651,2.5
+Axe,Mage,500,92,418,25,330,21,3.5,30,0.5,550,6.5,0.6,8,0.8,0,0,53,3,0.668,2.0

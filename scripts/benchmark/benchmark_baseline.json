@@ -1,0 +1,42 @@
+[
+  {
+    "device_type": "cpu",
+    "device_name": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "workers": 1,
+    "batch_size": 100,
+    "runtime_sec": 0.5295595999996294,
+    "throughput_evals_per_sec": 188.8361574411454,
+    "peak_ram_gb": 0,
+    "peak_vram_gb": 0.0
+  },
+  {
+    "device_type": "cpu",
+    "device_name": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "workers": 2,
+    "batch_size": 100,
+    "runtime_sec": 3.7678759999980684,
+    "throughput_evals_per_sec": 26.5401515336628,
+    "peak_ram_gb": 0,
+    "peak_vram_gb": 0.0
+  },
+  {
+    "device_type": "cpu",
+    "device_name": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "workers": 4,
+    "batch_size": 100,
+    "runtime_sec": 4.178834899998037,
+    "throughput_evals_per_sec": 23.93011506629443,
+    "peak_ram_gb": 0,
+    "peak_vram_gb": 0.0
+  },
+  {
+    "device_type": "cpu",
+    "device_name": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "workers": 8,
+    "batch_size": 100,
+    "runtime_sec": 6.0878421000015805,
+    "throughput_evals_per_sec": 16.426181618602435,
+    "peak_ram_gb": 0,
+    "peak_vram_gb": 0.0
+  }
+]

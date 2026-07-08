@@ -35,15 +35,20 @@ def _eval_worker(candidate):
     from src.algorithms.discrete_algorithms import evaluate_discrete
     
     start_t = time.perf_counter()
+    
+    # Ensure return_components is set without duplicating kwargs
+    worker_config = dict(_CONFIG)
+    worker_config['return_components'] = True
+    
     if _MODE == "continuous":
-        res = eval_cont(_BASE_DATA, candidate, return_components=True, **_CONFIG)
+        res = eval_cont(_BASE_DATA, candidate, **worker_config)
         fitness, _, _, rbi, mds, Sbalance, Pduration, Sentropy, PL2 = res
         metrics = {
             "rbi": float(rbi), "mds": float(mds), "Sbalance": float(Sbalance),
             "Pduration": float(Pduration), "Sentropy": float(Sentropy), "PL2": float(PL2)
         }
     else:
-        res = evaluate_discrete(_BASE_DATA, candidate, eval_cont, return_components=True, **_CONFIG)
+        res = evaluate_discrete(_BASE_DATA, candidate, eval_cont, **worker_config)
         fitness, _, _, rbi, mds, pressure, violation, magnitude, Sbalance, Pduration, Sentropy, PL2 = res
         metrics = {
             "rbi": float(rbi), "mds": float(mds), "pressure": float(pressure),

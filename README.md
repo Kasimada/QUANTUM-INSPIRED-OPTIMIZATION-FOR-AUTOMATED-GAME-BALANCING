@@ -33,6 +33,14 @@ cd AQEA-Game-Balancer
 pip install -r requirements.txt
 ```
 
+> [!WARNING]
+> **GPU Acceleration (CUDA) on Windows:**
+> By default, `pip install -r requirements.txt` on Windows might install the CPU-only version of PyTorch. If the Launcher dashboard displays `Torch : 2.x.x+cpu (CUDA: No)`, you must manually install the CUDA version to enable GPU tensor evaluation:
+> ```bash
+> pip uninstall torch torchvision torchaudio -y
+> pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+> ```
+
 ---
 
 ## Quick Start

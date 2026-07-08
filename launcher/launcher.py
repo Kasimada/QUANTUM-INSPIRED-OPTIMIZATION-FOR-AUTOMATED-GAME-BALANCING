@@ -23,7 +23,7 @@ TEXT = {
     'en': {
         'title': f'=== {APP_NAME} v{__version__} ===',
         'lang_prompt': 'Select Language (1=En, 2=Vi): ',
-        'menu': '\n1. Dataset\n2. Mode\n3. Scenario\n4. Algorithms\n5. Trials\n6. FEs\n7. Workers\n8. Device\n9. Seed\n10. Output Folder\n11. Layout\n12. Load Profile\n13. Save Profile\n14. Export Config\n15. Delete Profile\n\n0. Review Configuration\nSelect option (B=Back, Q=Quit, S=Start, H=Help): ',
+        'menu': '\n1. Dataset\n2. Mode\n3. Scenario\n4. Algorithms\n5. Trials\n6. FEs\n7. Workers\n8. Device\n9. Seed\n10. Output Folder\n11. Layout\n12. Load Profile\n13. Save Profile\n14. Export Config\n15. Import Config\n16. Delete Profile\n\n0. Review Configuration\nSelect option (B=Back, Q=Quit, S=Start, H=Help): ',
         'not_set': 'Not Selected',
         'conf_title': '\n=========================================\nConfiguration Summary\n=========================================',
         'status_incomplete': 'Status: Configuration Incomplete',
@@ -57,7 +57,7 @@ TEXT = {
     'vi': {
         'title': f'=== Khởi Chạy {APP_NAME} v{__version__} ===',
         'lang_prompt': 'Chọn Ngôn ngữ (1=En, 2=Vi): ',
-        'menu': '\n1. Dataset\n2. Mode\n3. Scenario\n4. Algorithms\n5. Trials\n6. FEs\n7. Workers\n8. Device\n9. Seed\n10. Output Folder\n11. Layout\n12. Load Profile\n13. Save Profile\n14. Export Config\n15. Delete Profile\n\n0. Xem lại Cấu Hình\nChọn tuỳ chọn (B=Quay lại, Q=Thoát, S=Bắt đầu chạy, H=Trợ giúp): ',
+        'menu': '\n1. Dataset\n2. Mode\n3. Scenario\n4. Algorithms\n5. Trials\n6. FEs\n7. Workers\n8. Device\n9. Seed\n10. Output Folder\n11. Layout\n12. Load Profile\n13. Save Profile\n14. Export Config\n15. Import Config\n16. Delete Profile\n\n0. Xem lại Cấu Hình\nChọn tuỳ chọn (B=Quay lại, Q=Thoát, S=Bắt đầu chạy, H=Trợ giúp): ',
         'not_set': 'Chưa chọn',
         'conf_title': '\n=========================================\nCấu Hình Hiện Tại\n=========================================',
         'status_incomplete': 'Trạng thái: Chưa hoàn tất cấu hình',
@@ -323,6 +323,19 @@ def export_config():
         json.dump(config, f, indent=4, ensure_ascii=False)
     print(f"Exported to {ans}")
 
+def import_config():
+    ans = safe_input("Enter path to JSON config file to import: ")
+    if ans.lower() == 'b': return
+    if not ans: return
+    try:
+        with open(ans, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            config.update({k: v for k, v in data.items() if k != "metadata"})
+            config["profile_name"] = data.get("metadata", {}).get("profile_name", Path(ans).stem)
+        print(f"Successfully imported config from {ans}")
+    except Exception as e:
+        print(f"Failed to import config: {e}")
+
 def is_ready():
     req = ['dataset', 'mode', 'scenario', 'trials', 'fes', 'workers', 'device']
     for r in req:
@@ -529,7 +542,8 @@ def main():
         elif ans == '12': load_config()
         elif ans == '13': save_config()
         elif ans == '14': export_config()
-        elif ans == '15': delete_config()
+        elif ans == '15': import_config()
+        elif ans == '16': delete_config()
         elif ans == '0':
             render_state()
             if not is_ready():

@@ -21,6 +21,7 @@ You can also customize Trials (`5`), Max FEs (`6`), Workers (`7`), or configure 
 - **Device (GPU/CPU)**: The launcher automatically detects if a compatible NVIDIA GPU (CUDA) is available. If not, it defaults to CPU and hides the GPU option to prevent crashes.
 - **Seed**: A random seed ensures reproducibility. If you input a specific number (e.g., 42), the algorithms will produce the exact same results every time. If left blank, a default seed is used.
 - **Output Folder & Layout**: By default, the system automatically saves results to `results/` using a smart layout. You can change the layout (Option `11`) to group by Date + Config (e.g. `2026-07-04/001_discrete`), Date only, Config only, or Flat. The system is equipped with an `OutputManager` that automatically detects collisions, warns you about interrupted runs (stale locks), and prevents accidental overwrites.
+- **Import/Export Config**: You can use Option `14` to Export your current configuration to a JSON file (e.g., `benchmark.json`), and share it with colleagues. They can use Option `15` to Import the JSON file and instantly replicate your exact setup!
 
 ## Using the CLI directly
 For automation, you can run the core runner directly:

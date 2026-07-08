@@ -52,11 +52,13 @@ class QEAOptimizer(Optimizer):
                     for k in range(3):
                         candidate = []
                         for j in range(num_genes):
-                            prob = math.cos(angles[i][j]) ** 2
-                            if random.random() < prob:
-                                candidate.append(0.7 + 0.6 * prob)
-                            else:
-                                candidate.append(0.7 + 0.6 * (1.0 - prob))
+                            # Quantum collapse using Beta distribution
+                            # Mean = cos^2(theta)
+                            alpha = (math.cos(angles[i][j]) ** 2) * 10.0 + 1.0
+                            beta_param = (math.sin(angles[i][j]) ** 2) * 10.0 + 1.0
+                            sampled = random.betavariate(alpha, beta_param)
+                            # Map from [0, 1] to [0.7, 1.3]
+                            candidate.append(0.7 + 0.6 * sampled)
                         batch.append(candidate)
                         metadata.append(('unbalanced', i, k))
                 else:
@@ -167,9 +169,16 @@ class QEAOptimizer(Optimizer):
                         direction = -1.0
                     else:
                         direction = 0.0
-                    new_angle = angles[i][j] + direction * theta_base * rotation_factor
+
+                    # Aging Mechanism & Adaptive Rotation
+                    aging_factor = math.exp(-0.55 * (evals / max(1, max_FEs)))
+                    adaptive_rotation = theta_base * rotation_factor * aging_factor
+
+                    new_angle = angles[i][j] + direction * adaptive_rotation
+                    
                     if random.random() < mutation_rate:
                         new_angle += random.uniform(-mutation_span, mutation_span)
+                    
                     angles[i][j] = min(max(new_angle, 0.0), math.pi / 2.0)
 
             if self.adaptive and stagnant_generations >= 18:

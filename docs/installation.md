@@ -21,8 +21,19 @@ pip install -r requirements.txt
 ```
 
 ## 4. CUDA Setup (Optional but Recommended)
-If you have an NVIDIA GPU and want to leverage hardware acceleration (`--device auto`), ensure you have the appropriate NVIDIA drivers installed. The standard `requirements.txt` includes a PyTorch version that is generally compatible with CUDA 12.1.
-To verify, you can run:
+If you have an NVIDIA GPU and want to leverage hardware acceleration (`--device auto`), ensure you have the appropriate NVIDIA drivers installed.
+
+> [!WARNING]
+> **Windows Installation Pitfall:**
+> Running `pip install -r requirements.txt` on Windows will often install the **CPU-only** version of PyTorch by default. If your launcher says `Torch: 2.x.x+cpu (CUDA: No)`, you must manually install the CUDA-enabled version.
+> 
+> To fix this and enable GPU acceleration, run:
+> ```bash
+> pip uninstall torch torchvision torchaudio -y
+> pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+> ```
+
+To verify your installation, you can run:
 ```bash
 python -c "import torch; print('CUDA Available:', torch.cuda.is_available())"
 ```

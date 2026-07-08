@@ -11,7 +11,8 @@ results/**/*.csv
 results/**/*.json
 results/**/*.pkl
 results/**/*.npy
-data/raw/
+data/raw/*
+!data/raw/original_character_stats.csv
 data/processed/
 !data/README.md
 !data/examples/

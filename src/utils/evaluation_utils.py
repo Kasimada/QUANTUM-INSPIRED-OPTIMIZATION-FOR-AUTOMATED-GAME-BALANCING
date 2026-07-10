@@ -41,7 +41,13 @@ class ContinuousReport:
         summary = []
         for algorithm in sorted({row["algorithm"] for row in rows}):
             subset = [row for row in rows if row["algorithm"] == algorithm]
-            out = {"algorithm": algorithm, "trials": len(subset)}
+            best_row = max(subset, key=lambda r: float(r["fitness"]))
+            out = {
+                "algorithm": algorithm, 
+                "trials": len(subset),
+                "best_trial": int(best_row["trial"]) + 1,
+                "best_fitness": float(best_row["fitness"])
+            }
             for metric in [
                 "fitness",
                 "rbi",
@@ -317,7 +323,13 @@ class DiscreteReport:
         summary = []
         for algorithm in sorted({row["algorithm"] for row in rows}):
             subset = [row for row in rows if row["algorithm"] == algorithm]
-            out = {"algorithm": algorithm, "trials": len(subset)}
+            best_row = max(subset, key=lambda r: float(r["fitness"]))
+            out = {
+                "algorithm": algorithm, 
+                "trials": len(subset),
+                "best_trial": int(best_row["trial"]) + 1,
+                "best_fitness": float(best_row["fitness"])
+            }
             for metric in [
                 "fitness",
                 "rbi",
